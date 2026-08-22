@@ -1,0 +1,23 @@
+ul li{
+    list-style: none;
+    display: inline;
+    padding: 23px;
+    margin: 10px;
+    color: white;
+    
+    
+}
+nav{
+    margin-top: 20px;
+    background-color: purple;
+    padding: 12px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins' sans-serif;
+}
+ul li a{
+    text-decoration: underline ;
+    
+}

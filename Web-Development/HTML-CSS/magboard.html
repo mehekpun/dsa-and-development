@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joint Secretaries — Magboard 2026-27</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=DM+Serif+Display:ital@0;1&family=Caveat:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html,body{
+    width:100%;
+    background:#EFE9DC;
+    font-family:'Inter',sans-serif;
+  }
+
+  body{
+    display:block;
+    padding:24px 0;
+  }
+
+  /* fluid canvas: keeps the true 1080x1350 (4:5) Instagram-post ratio
+     at any width, and everything inside scales off container width
+     via cqw units — no JS, no transform, normal page scroll. */
+  .frame{
+    container-type: inline-size;
+    width:min(1080px, 96vw);
+    aspect-ratio: 1080 / 1350;
+    margin:0 auto;
+    background:#F7F3E9;
+    padding:2.4cqw;
+  }
+
+  .art{
+    position:relative;
+    width:100%;
+    height:100%;
+    background:
+      radial-gradient(ellipse at 20% 10%, #3E5A3F 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 0%, #2F4A34 0%, transparent 60%),
+      linear-gradient(160deg, #37502F 0%, #2A3F28 45%, #24361F 100%);
+    overflow:hidden;
+    border:2px solid rgba(0,0,0,0.06);
+  }
+
+  .foliage{
+    position:absolute;
+    inset:0;
+    background-image:
+      radial-gradient(circle at 12% 18%, #E8B27C 0 3.15cqw, transparent 3.3cqw),
+      radial-gradient(circle at 22% 12%, #D98F55 0 2.4cqw, transparent 2.6cqw),
+      radial-gradient(circle at 8% 30%, #E8B27C 0 2.0cqw, transparent 2.2cqw),
+      radial-gradient(circle at 78% 6%, #E8B27C 0 2.8cqw, transparent 3.0cqw),
+      radial-gradient(circle at 90% 16%, #D98F55 0 2.2cqw, transparent 2.4cqw),
+      radial-gradient(circle at 70% 20%, #C97B4A 0 1.7cqw, transparent 1.9cqw),
+      radial-gradient(circle at 85% 92%, #E8B27C 0 2.8cqw, transparent 3.0cqw),
+      radial-gradient(circle at 94% 82%, #D98F55 0 2.0cqw, transparent 2.2cqw),
+      radial-gradient(circle at 10% 88%, #C97B4A 0 2.4cqw, transparent 2.6cqw),
+      radial-gradient(circle at 4% 78%, #E8B27C 0 1.9cqw, transparent 2.1cqw);
+    opacity:0.95;
+  }
+
+  .leaf-layer{
+    position:absolute;
+    inset:0;
+    background-image:
+      radial-gradient(ellipse 8.3cqw 3.7cqw at 15% 15%, rgba(87,120,72,0.9) 0%, transparent 70%),
+      radial-gradient(ellipse 6.5cqw 12cqw at 25% 8%, rgba(70,100,58,0.85) 0%, transparent 70%),
+      radial-gradient(ellipse 9.3cqw 4.6cqw at 82% 10%, rgba(87,120,72,0.9) 0%, transparent 70%),
+      radial-gradient(ellipse 5.6cqw 11.1cqw at 92% 20%, rgba(70,100,58,0.85) 0%, transparent 70%),
+      radial-gradient(ellipse 10.2cqw 5.1cqw at 88% 88%, rgba(87,120,72,0.9) 0%, transparent 70%),
+      radial-gradient(ellipse 6.5cqw 12cqw at 8% 85%, rgba(70,100,58,0.85) 0%, transparent 70%),
+      radial-gradient(ellipse 8.3cqw 4.2cqw at 5% 92%, rgba(87,120,72,0.9) 0%, transparent 70%);
+    mix-blend-mode:multiply;
+    opacity:0.7;
+  }
+
+  .vignette{
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(10,14,8,0.55) 100%);
+  }
+
+  .grain{
+    position:absolute; inset:0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    opacity:0.5;
+    pointer-events:none;
+  }
+
+  .badge{
+    position:absolute;
+    top:5.9cqw;
+    left:5.9cqw;
+    background:#F7F3E9;
+    padding:1.85cqw 2.8cqw 1.5cqw 2.8cqw;
+    border-radius:0 2.4cqw 2.4cqw 0;
+    box-shadow: 0 0.9cqw 2.2cqw rgba(0,0,0,0.28);
+  }
+  .badge .name{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:900;
+    font-style:italic;
+    font-size:3.15cqw;
+    letter-spacing:0.09cqw;
+    color:#1E1E18;
+    line-height:1;
+    white-space:nowrap;
+  }
+  .badge .year{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:1.75cqw;
+    color:#5B5647;
+    margin-top:0.55cqw;
+    letter-spacing:0.09cqw;
+  }
+
+  .title-wrap{
+    position:absolute;
+    left:0; right:0;
+    top:50%;
+    transform:translateY(-50%);
+    text-align:center;
+    padding:0 6.5cqw;
+  }
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    letter-spacing:0.55cqw;
+    font-size:1.85cqw;
+    color:#E8CBA6;
+    text-transform:uppercase;
+    margin-bottom:1.65cqw;
+    opacity:0.9;
+  }
+  .title{
+    font-family:'DM Serif Display', serif;
+    font-style:italic;
+    font-size:10.9cqw;
+    line-height:1.02;
+    color:#FBF7ED;
+    text-shadow: 0 0.7cqw 2.8cqw rgba(0,0,0,0.45);
+  }
+  .title .line2{
+    display:block;
+    color:#E8B27C;
+  }
+
+  .rule{
+    width:11.1cqw;
+    height:0.28cqw;
+    background:#E8B27C;
+    margin:3.15cqw auto 0 auto;
+    opacity:0.85;
+  }
+
+  .bottom-strip{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    background:#F7F3E9;
+    padding:3.5cqw 5.9cqw;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow: 0 -0.75cqw 2.2cqw rgba(0,0,0,0.15);
+  }
+  .signature{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:4.8cqw;
+    color:#1E1E18;
+  }
+  .tagline{
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    font-size:1.85cqw;
+    color:#5B5647;
+    text-align:right;
+    line-height:1.35;
+    max-width:31.5cqw;
+  }
+
+  .sticker{
+    position:absolute;
+    width:5.9cqw; height:5.9cqw;
+    border-radius:50%;
+    background:#F2C94C;
+    left:6.5cqw;
+    top:47.4cqw;
+    box-shadow:0 0.55cqw 1.5cqw rgba(0,0,0,0.35);
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="art">
+      <div class="foliage"></div>
+      <div class="leaf-layer"></div>
+      <div class="vignette"></div>
+      <div class="grain"></div>
+
+      <div class="badge">
+        <div class="name">MAGBOARD</div>
+        <div class="year">2026&ndash;27</div>
+      </div>
+
+      <div class="sticker"></div>
+
+      <div class="title-wrap">
+        <div class="eyebrow">Editorial Board</div>
+        <div class="title">Joint<span class="line2">Secretaries</span></div>
+        <div class="rule"></div>
+      </div>
+
+      <div class="bottom-strip">
+        <div class="signature">Magboard</div>
+        <div class="tagline">Two voices,<br>one desk.</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

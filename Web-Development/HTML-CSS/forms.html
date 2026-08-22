@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About forms</title>
+  </head>
+  <body>
+    <h1>Learning about forms</h1>
+    <h2>example:</h2>
+    <h3>COLLECTING STUDENT DATA</h3>
+    <form action="" method="post">
+      <label for="username">enter your username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="enter your username"
+      />
+      <br />
+      <div>
+        gender :
+        <input type="radio" id="male" name="gender" value="male" />
+        <label for="male">male</label>
+        <input type="radio" id="female" name="gender" value="female" />
+        <label for="female">female</label>
+      </div>
+      <div>
+        <input type="checkbox" id="happy" name="mood" value="yes">
+        <label for="happy">happy</label>
+        <input type="checkbox" id="sad" name="mood" value="yes">
+        <label for="sad">sad</label>
+      </div>
+      <div>
+        <label for="comment">enter your comment</label>
+        <br>
+        <textarea name="comment" id="comment" row="4" cols="40"></textarea>
+      </div>
+      <div>
+        <select name="fruits" id="fruits">
+          fruits
+            <option value="apple">apple</option>
+            <option value="banana">banana</option>
+            <option value="mango">mango</option>
+        </select>
+      </div>
+    </form>
+  </body>
+</html>
